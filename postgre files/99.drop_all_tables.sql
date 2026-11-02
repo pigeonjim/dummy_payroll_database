@@ -1,0 +1,12 @@
+-- script to remove all tables from db for reset purposes
+
+DROP TABLE IF EXISTS deductions CASCADE;
+DROP TABLE IF EXISTS payments CASCADE;
+DROP TABLE IF EXISTS payslips CASCADE;
+DROP TABLE IF EXISTS payroll_runs CASCADE;
+DROP TABLE IF EXISTS deduction_config CASCADE;
+DROP TABLE IF EXISTS payment_config CASCADE;
+DROP TABLE IF EXISTS ee_jobs CASCADE;
+DROP TABLE IF EXISTS office CASCADE;
+DROP TABLE IF EXISTS employer CASCADE;
+DROP TABLE IF EXISTS employee CASCADE;
