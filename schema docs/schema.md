@@ -24,7 +24,7 @@ runid (primary key), er_id,frequency, tax_year, tax_period, pay_date
 Tbl: payslips
 Fields:
 payslip_id (primary key), runid, job_id, tax, ee_ni, er_ni, ee_pension, er_pension
-Stored/calculated totals: taxable_gross, niable_gross, net, gross_taxbale_niable, gross_taxable_only, gross_niable_only, gross_no_tax_ni
+Stored/calculated totals: net, gross_taxbale_niable, gross_taxable_only, gross_niable_only, gross_no_tax_ni
                           , ded_pretax_preni, ded_pretax_only, ded_preni_only, ded_posttax_postni
 Tbl: payments
 Fields:
