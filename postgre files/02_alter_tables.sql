@@ -38,3 +38,6 @@ ALTER TABLE ee_jobs ADD CONSTRAINT eejobs_freq_fk FOREIGN KEY (freq_id)
 
 ALTER TABLE payroll_runs ADD CONSTRAINT pruns_freq_fk FOREIGN KEY (freq_id)
     REFERENCES frequency (freq_id) ON DELETE RESTRICT;
+
+ALTER TABLE payslips ADD CONSTRAINT pslps_freq_fk FOREIGN KEY (freq_id)
+    REFERENCES frequency (freq_id) ON DELETE RESTRICT;

@@ -71,6 +71,7 @@ CREATE TABLE payslips(
     payslip_id INT PRIMARY KEY
     , runid INT
     , job_id INT
+    , freq_id TEXT
     , tax NUMERIC(8,2)
     , ee_ni NUMERIC(8,2)
     , er_ni NUMERIC(8,2)
