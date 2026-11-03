@@ -41,3 +41,23 @@ ALTER TABLE payroll_runs ADD CONSTRAINT pruns_freq_fk FOREIGN KEY (freq_id)
 
 ALTER TABLE payslips ADD CONSTRAINT pslps_freq_fk FOREIGN KEY (freq_id)
     REFERENCES frequency (freq_id) ON DELETE RESTRICT;
+
+-- UNIQUE constraints
+
+ALTER TABLE payroll_runs ADD CONSTRAINT uq_pruns_oneperiod_perer UNIQUE (er_id, freq_id, tax_year, tax_period);
+ALTER TABLE payslips ADD CONSTRAINT uq_pslps_ajob_perperiod UNIQUE (job_id,runid);
+
+--- FIX to enforce one payslip, per job, per payrun where the job frequency matches the payslip frequency
+
+    -- UNIQUES for composite foreign keys to use
+ALTER TABLE ee_jobs ADD CONSTRAINT uq_eejobs_freq UNIQUE (job_id, freq_id);
+ALTER TABLE payroll_runs ADD CONSTRAINT uq_pruns_freq UNIQUE (runid, freq_id);
+
+    -- Foreign keys in payslips into payroll runs
+ALTER TABLE payslips ADD CONSTRAINT pslps_job_compfk FOREIGN KEY (job_id, freq_id)
+    REFERENCES ee_jobs (job_id, freq_id) ON DELETE RESTRICT;
+
+ALTER TABLE payslips ADD CONSTRAINT pslps_pruns_compfk FOREIGN KEY (runid, freq_id)
+    REFERENCES payroll_runs (runid, freq_id) ON DELETE RESTRICT;
+
+------------------

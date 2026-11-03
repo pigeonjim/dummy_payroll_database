@@ -32,7 +32,7 @@ CREATE TABLE frequency(
     freq_id TEXT PRIMARY KEY
     , frequency TEXT
     , total_periods INT
-    )
+    );
 
 CREATE TABLE ee_jobs(
     job_id INT PRIMARY KEY
