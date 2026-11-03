@@ -40,8 +40,9 @@ CREATE TABLE ee_jobs(
     , office_code INT NOT NULL
     , job_title TEXT NOT NULL
     , freq_id TEXT NOT NULL
-    , start_date DATE NOT NULL
+    , start_date DATE NOT NULL CHECK (start_date BETWEEN '1950-01-01' and '2100-01-01')
     , leave_date DATE
+    , CONSTRAINT ee_check_dates CHECK (leave_date >= start_date)
     );
 
 CREATE TABLE payment_config(
@@ -65,6 +66,18 @@ CREATE TABLE payroll_runs(
     , tax_year INT NOT NULL
     , tax_period INT NOT NULL
     , pay_date DATE NOT NULL
+    , CONSTRAINT chk_pruns_period 
+            CHECK(CASE freq_id 
+                    WHEN 'M' then tax_period BETWEEN 1 and 12
+                    WHEN 'W' then tax_period BETWEEN 1 and 52
+                    WHEN 'F' then tax_period BETWEEN 1 and 26
+                    WHEN 'FW' then tax_period BETWEEN 1 and 13
+                    WHEN 'Q' then tax_period BETWEEN 1 and 4
+                    WHEN 'A' then tax_period = 1
+                    ELSE false
+            END)
+    , CONSTRAINT chk_pruns_year CHECK (tax_year BETWEEN 2000 AND 2100)
+    , CONSTRAINT chk_pruns_paydate CHECK (pay_date BETWEEN '2000-01-01' AND '2100-01-01')
     );
 
 CREATE TABLE payslips(
