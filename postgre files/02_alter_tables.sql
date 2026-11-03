@@ -28,7 +28,7 @@ ALTER TABLE payments ADD CONSTRAINT pmnts_payconfig_fk FOREIGN KEY (payment_conf
 ALTER TABLE deductions ADD CONSTRAINT ded_pslps_fk FOREIGN KEY (payslip_id)
     REFERENCES payslips (payslip_id) ON DELETE RESTRICT;
 
-ALTER TABLE deductions ADD CONSTRAINT ded_decondig_fk FOREIGN KEY (deduction_configid)
+ALTER TABLE deductions ADD CONSTRAINT ded_deconfig_fk FOREIGN KEY (deduction_configid)
     REFERENCES deduction_config (deduction_configid) ON DELETE RESTRICT;
 
 -- foreign keys needed due to addtion of frequency table
