@@ -26,3 +26,6 @@ Tax relief on pensions in real life is complex and depends on tax bandings, this
 NI numbers have a more complex set of rules that those enfored by my REGEX
 
 Tax is simplified in the data generator code. No tax below 20k, 20% from 20k up to 40k and 40% above 40k
+
+-- If you dont want to use the generator there is a set of fake data in CSV files that you can \copy into your database. These are located in the folder called
+    Sample data to import. The data for frequency, payment_config and deduction_config are also in there in CSV.

@@ -11,9 +11,9 @@ employee	    ni_number	            TEXT	        REGEX (2 letters), (6 digits),(1
                     
 employer	    er_id	                INT	            Primary key		
 employer	    er_name	                TEXT			
-employer	    tax_ref	                TEXT	        REGEX (3 digits) / (6 alphanumeric chars)		UTR
+employer	    tax_ref	                TEXT	        REGEX (3 digits) / (6 alphanumeric chars)
 employer	    bank_sort_code	        TEXT	        REGEX (2 digits)-(2 digits)-(2 digits)		
-employer	    bank_account_no	        TEXT	        8 digits – padded with zeros if required		
+employer	    bank_account_no	        TEXT	        REGEX - 8 digits – padded with zeros if required --> Postgre doesn’t store padded zeros so keep as text
                     
 office	        office_code	            INT	            Primary key		
 office	        er_id	                INT	            Foreign Key → employer – RESTRICT		
@@ -34,12 +34,12 @@ ee_jobs	        freq_id 	            TEXT	        Foreign Key → frequency – 
 ee_jobs	        start_date	            DATE		    Date must be within last 100 years?
 ee_jobs	        leave_date	            DATE	        Cant be before start date		
                     
-payment_config	payment_configid	    INT	            Primary key		
+payment_config	payment_configid	    TEXT	           Primary key		
 payment_config	taxable	                BOOL			
 payment_config	niable	                BOOL			
 payment_config	description	            TEXT			
                     
-deduction_config  deduction_configid	INT	            Primary key		
+deduction_config  deduction_configid	TEXT	            Primary key		
 deduction_config  pre_tax	            BOOL			
 deduction_config  pre_ni	            BOOL			
 deduction_config  description	        TEXT			
@@ -62,21 +62,21 @@ payslips	    er_ni	                NUMERIC(8,2)
 payslips	    ee_pension	            NUMERIC(8,2)			
 payslips	    er_pension	            NUMERIC(8,2)			
 payslips	    net	                    NUMERIC(8,2)	Stored calculation		
-payslips	    gross_taxable_only	    NUMERIC(8,2)	Stored calculation		--taxable but not niable
-payslips	    gross_niable_only	    NUMERIC(8,2)	Stored calculation		- niable but not taxable
-payslips	    gross_taxable_niable    NUMERIC(8,2)	Stored calculation		
-payslips	    gross_notax_noni	    NUMERIC(8,2)	Stored calculation		-- not taxable or niable
-payslips	    ded_pretax_preni	    NUMERIC(8,2)	Stored calculation		
-payslips	    ded_pretax_only	        NUMERIC(8,2)	Stored calculation		-- pre tax, post ni deduction
-payslips	    ded_preni_only	        NUMERIC(8,2)	Stored calculation		-- pre ni, post tax deduction
-payslips	    ded_posttax_postni	    NUMERIC(8,2)	Stored calculation		
+payslips	    gross_taxable_only	    NUMERIC(8,2)    --taxable but not niable
+payslips	    gross_niable_only	    NUMERIC(8,2)    - niable but not taxable
+payslips	    gross_taxable_niable    NUMERIC(8,2)			
+payslips	    gross_notax_noni	    NUMERIC(8,2)    -- not taxable or niable
+payslips	    ded_pretax_preni	    NUMERIC(8,2)			
+payslips	    ded_pretax_only	        NUMERIC(8,2)    -- pre tax, post ni deduction
+payslips	    ded_preni_only	        NUMERIC(8,2)    -- pre ni, post tax deduction
+payslips	    ded_posttax_postni	    NUMERIC(8,2)	
                     
 payments	    payment_ref	            INT	            Primary key		
 payments	    payslip_id	            INT	            Foreign Key → payslips – RESTRICT		
-payments	    payment_configid	    INT	            Foreign Key → payment_config – RESTRICT		
+payments	    payment_configid	    TEXT	        Foreign Key → payment_config – RESTRICT		
 payments	    amount	                NUMERIC(8,2)			
                     
 deductions	    deduction_ref	        INT	            Primary key		
 deductions	    payslip_id	            INT	            Foreign Key → payslips – RESTRICT		
-deductions	    deduction_configid	    INT	            Foreign Key → deduction_config – RESTRICT		
+deductions	    deduction_configid	    TEXT	        Foreign Key → deduction_config – RESTRICT		
 deductions	    amount	                NUMERIC(8,2)			

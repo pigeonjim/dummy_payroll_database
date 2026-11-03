@@ -62,14 +62,14 @@ ALTER TABLE payslips ADD CONSTRAINT pslps_pruns_compfk FOREIGN KEY (runid, freq_
 
 -- REGEX checks
 
-ALTER employee ADD CONSTRAINT regex_ee_pcode CHECK (post_code ~ '^[0-9A-Z]{2,4} [0-9][A-Z]{2}$')
+ALTER TABLE employee ADD CONSTRAINT regex_ee_pcode CHECK (post_code ~ '^[0-9A-Z]{2,4} [0-9][A-Z]{2}$');
 
-ALTER employee ADD CONSTRAINT regex_ee_nino CHECK (ni_number ~ '^[A-Z]{2}\d{6}[A-D]$')
+ALTER TABLE employee ADD CONSTRAINT regex_ee_nino CHECK (ni_number ~ '^[A-Z]{2}\d{6}[A-D]$');
 
-ALTER employer ADD CONSTRAINT regex_er_taxref CHECK (tax_ref ~ '^\d{3}/[A-Z0-9]{6}$')
+ALTER TABLE employer ADD CONSTRAINT regex_er_taxref CHECK (tax_ref ~ '^\d{3}/[A-Z0-9]{6}$');
 
-ALTER employer ADD CONSTRAINT regex_er_sortcd CHECK (bank_sort_code ~ '^\d{2}-\d{2}-\d{2}$')
+ALTER TABLE employer ADD CONSTRAINT regex_er_sortcd CHECK (bank_sort_code ~ '^\d{2}-\d{2}-\d{2}$');
 
-ALTER employer ADD CONSTRAINT regex_er_bankno CHECK (bank_account_no ~ '^\d{8}$')
+ALTER TABLE employer ADD CONSTRAINT regex_er_bankno CHECK (bank_account_no ~ '^\d{8}$');
 
-ALTER office ADD CONSTRAINT regex_off_pcode CHECK (post_code ~ '^[0-9A-Z]{2,4} [0-9][A-Z]{2}$')
+ALTER TABLE office ADD CONSTRAINT regex_off_pcode CHECK (post_code ~ '^[0-9A-Z]{2,4} [0-9][A-Z]{2}$');

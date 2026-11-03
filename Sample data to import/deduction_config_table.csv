@@ -1,0 +1,8 @@
+deduction_configid,pre_tax,pre_ni,description
+D1,0,0,Loan
+D2,0,0,Parking
+D3,1,0,BIK_Ded
+D4,1,1,Overpayment
+D5,1,1,Sickleave
+D6,1,1,Cycle_to_work
+D7,0,0,Gym

@@ -1,0 +1,7 @@
+freq_id,frequency,total_periods
+M,Monthly,12
+W,Weekly,52
+F,Fortnightly,26
+FW,Four_weekly,13
+Q,Quarterly,4
+A,Annual,1

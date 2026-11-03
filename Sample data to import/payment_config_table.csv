@@ -1,0 +1,11 @@
+payment_configid,taxable,niable,description
+P1,1,1,Salary
+P2,1,1,Overtime
+P3,1,1,Hourly
+P4,0,0,Expenses
+P5,1,0,BIK
+P6,1,1,Bonus
+P7,0,0,Petty_cash
+P8,1,1,Holiday
+P9,0,0,Fuel
+P10,1,1,Overnight

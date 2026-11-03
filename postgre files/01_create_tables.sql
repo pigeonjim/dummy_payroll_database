@@ -45,14 +45,14 @@ CREATE TABLE ee_jobs(
     );
 
 CREATE TABLE payment_config(
-    payment_configid INT PRIMARY KEY
+    payment_configid TEXT PRIMARY KEY
     , taxable BOOl NOT NULL
     , niable BOOl NOT NULL
     , description TEXT NOT NULL
     );
 
 CREATE TABLE deduction_config(
-    deduction_configid INT PRIMARY KEY
+    deduction_configid TEXT PRIMARY KEY
     , pre_tax BOOl NOT NULL
     , pre_ni BOOl NOT NULL
     , description TEXT NOT NULL
@@ -95,13 +95,13 @@ CREATE TABLE payslips(
 CREATE TABLE payments(
     payment_ref INT PRIMARY KEY
     , payslip_id INT NOT NULL
-    , payment_configid INT NOT NULL
+    , payment_configid TEXT NOT NULL
     , amount NUMERIC(8,2) NOT NULL DEFAULT 0
     );
 
 CREATE TABLE deductions(
     deduction_ref INT PRIMARY KEY
     , payslip_id INT NOT NULL
-    , deduction_configid INT NOT NULL
+    , deduction_configid TEXT NOT NULL
     , amount NUMERIC(8,2) NOT NULL DEFAULT 0
     );
