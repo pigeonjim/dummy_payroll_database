@@ -30,3 +30,11 @@ ALTER TABLE deductions ADD CONSTRAINT ded_pslps_fk FOREIGN KEY (payslip_id)
 
 ALTER TABLE deductions ADD CONSTRAINT ded_decondig_fk FOREIGN KEY (deduction_configid)
     REFERENCES deduction_config (deduction_configid) ON DELETE RESTRICT;
+
+-- foreign keys needed due to addtion of frequency table
+
+ALTER TABLE ee_jobs ADD CONSTRAINT eejobs_freq_fk FOREIGN KEY (freq_id)
+    REFERENCES frequency (freq_id) ON DELETE RESTRICT;
+
+ALTER TABLE payroll_runs ADD CONSTRAINT pruns_freq_fk FOREIGN KEY (freq_id)
+    REFERENCES frequency (freq_id) ON DELETE RESTRICT;

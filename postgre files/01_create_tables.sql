@@ -28,11 +28,18 @@ CREATE TABLE office(
     , post_code TEXT
     );
 
+CREATE TABLE frequency(
+    freq_id TEXT PRIMARY KEY
+    , frequency TEXT
+    , total_periods INT
+    )
+
 CREATE TABLE ee_jobs(
     job_id INT PRIMARY KEY
     , ee_no INT
     , office_code INT
     , job_title TEXT
+    , freq_id TEXT
     , start_date DATE
     , leave_date DATE
     );
@@ -54,7 +61,7 @@ CREATE TABLE deduction_config(
 CREATE TABLE payroll_runs(
     runid INT PRIMARY KEY
     , er_id INT
-    , frequency TEXT
+    , freq_id TEXT
     , tax_year INT
     , tax_period INT
     , pay_date DATE
