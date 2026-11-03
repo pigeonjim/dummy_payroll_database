@@ -22,3 +22,7 @@ There a lot of these because real life payroll is complex and because this is ju
 Pensions are assumed to be for all EEs, on all payments.
 Pensions are assumed to be pre tax, post ni (net pay arrangement)
 Tax relief on pensions in real life is complex and depends on tax bandings, this is is ignored. For all EEs taxable gross is reduced by pension, net pay is minus pension.
+
+NI numbers have a more complex set of rules that those enfored by my REGEX
+
+Tax is simplified in the data generator code. No tax below 20k, 20% from 20k up to 40k and 40% above 40k
