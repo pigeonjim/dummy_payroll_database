@@ -77,7 +77,11 @@ CREATE TABLE payslips(
     , er_ni NUMERIC(8,2) NOT NULL DEFAULT 0
     , ee_pension NUMERIC(8,2) NOT NULL DEFAULT 0
     , er_pension NUMERIC(8,2) NOT NULL DEFAULT 0
-    , net NUMERIC(8,2) NOT NULL DEFAULT 0
+    , net NUMERIC(8,2) GENERATED ALWAYS AS (
+      gross_taxable_niable + gross_taxable_only + gross_niable_only + gross_notax_noni
+    - ded_pretax_preni - ded_pretax_only - ded_preni_only - ded_posttax_postni
+    - tax - ee_ni - ee_pension
+            ) STORED
     , gross_taxable_only NUMERIC(8,2) NOT NULL DEFAULT 0  --taxable but not niable
     , gross_niable_only NUMERIC(8,2) NOT NULL DEFAULT 0 -- niable but not taxable
     , gross_taxable_niable NUMERIC(8,2) NOT NULL DEFAULT 0
@@ -99,5 +103,5 @@ CREATE TABLE deductions(
     deduction_ref INT PRIMARY KEY
     , payslip_id INT NOT NULL
     , deduction_configid INT NOT NULL
-    , amount NUMERIC(8,2) NOT NULL DEFAULT 0 NOT NULL DEFAULT 0
+    , amount NUMERIC(8,2) NOT NULL DEFAULT 0
     );
