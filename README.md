@@ -1,4 +1,6 @@
 # dummy_payroll_database
+Postgre and Python with pandas
+
 Project objectives-
 
 To build a database from scratch myself using postgreSQL
