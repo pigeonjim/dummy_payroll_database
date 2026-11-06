@@ -1,4 +1,4 @@
-import datetime, csv, extract_data as exd
+import datetime, csv, frequency_data as exd
 
 
 class payrollYear:
@@ -23,9 +23,17 @@ class Payruns:
                 print("Year must be a number")
 
     def get_frequencies(self, freq_data: exd.readFreqDataInterface):
+        self.frequencies = freq_data.get_freq_data()
         
 
 
     @property
     def current_taxyear(self):
         return self.__current_taxyear
+
+class payrunsApplication:
+    """application to create 10 years of payroll runs
+        for all frequencies.
+        Current year plus 4 previous and 5 in the future"""
+    def __init__(self):
+        self.__payruns = Payruns
