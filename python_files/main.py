@@ -1,16 +1,16 @@
-import payruns as prs, csv
+import payruns as prs, csv, extract_data as exd
+from abc import ABC, abstractmethod
 
-freq_data = {}
-with open('../Sample_data/frequency_table.csv', newline='') as freq_file:
-    fr_reader = csv.reader(freq_file)
-    next(fr_reader) #to skip header row
-    for row in fr_reader:
-        try:
-            freq_data[row[0]] = int(row[2])
-        except ValueError:
-            print("Row error")
-            continue
-print(freq_data)
+
+
+
+#def getFreqData(freq_data: readFreqDataInterface):
+   # print(freq_data.freq_data)
+
+
+fd= exd.readFreqDataCSV('./Sample_data/frequency_table.csv')
+print(fd.freq_data)
+
 
 
 

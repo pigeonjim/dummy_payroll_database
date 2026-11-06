@@ -1,4 +1,6 @@
-import datetime, csv
+import datetime, csv, extract_data as exd
+
+
 class payrollYear:
     def  __init__(self,tax_year: int):
         self.__start = datetime.datetime(tax_year,4,5)
@@ -20,10 +22,9 @@ class Payruns:
             except ValueError:
                 print("Year must be a number")
 
-    def get_frequencies(self):
-        #seperate class?
-        with open('../Sample_data/frequency_table.csv') as freq_file:
-            csv.reader(freq_file,',')
+    def get_frequencies(self, freq_data: exd.readFreqDataInterface):
+        
+
 
     @property
     def current_taxyear(self):
