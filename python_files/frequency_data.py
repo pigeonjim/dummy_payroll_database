@@ -1,5 +1,23 @@
+"""
+This module has the functionality for the frequency table in the database
+It has an interface to allow for different input methods
+and a controller class frequencyData
+
+readFreqDataInterface
+    The following functions use the interface
+    and return a dictionary where
+        Key = freq_id : Value = No of periods;
+    readFreqDataCSV - Imports data from csv
+    keyFreqData - Allows for data entry via the console
+    qryFreqDataSQL - Will query the frequency table
+
+updateTbl - INSERTS and UPDATES the frequency table
+
+"""
+
+
 from abc import ABC, abstractmethod
-import csv
+import psycopg ,csv
 
 class readFreqDataInterface(ABC):
     """interface for getting frequency data input and processing into a dictionary
@@ -54,7 +72,11 @@ class keyFreqData(readFreqDataInterface):
         else:
             return self._freq_data
 
-# to do class qryFreqDataSQL
+class qryFreqDataSQL(readFreqDataInterface):
+    def __init__(self, db_ob):
+        pass
+
+
 
 class frequencyData:
     def __init__(self):

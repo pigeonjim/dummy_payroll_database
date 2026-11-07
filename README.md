@@ -1,10 +1,10 @@
 # dummy_payroll_database
-Postgre and Python with pandas
+Postgre and Python with pandas and psycopg
 
 Project objectives-
 
 To build a database from scratch myself using postgreSQL
-To create dummy data using pandas and populate the postgre database
+To create dummy data and populate the postgre database
 To provide SQL script files and py files that can be easily modified to create small databases of fake data
 The database is populated with a very simplified set of payroll data. There is no payroll processing just storage.
 
