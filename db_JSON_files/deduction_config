@@ -1,0 +1,6 @@
+{
+    "pre_tax": "boolean",
+    "pre_ni": "boolean",
+    "deduction_configid": "text",
+    "description": "text"
+}

@@ -1,0 +1,5 @@
+{
+    "total_periods": "integer",
+    "freq_id": "text",
+    "frequency": "text"
+}

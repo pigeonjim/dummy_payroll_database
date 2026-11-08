@@ -1,0 +1,9 @@
+{
+    "start_date": "date",
+    "leave_date": "date",
+    "office_code": "integer",
+    "job_id": "integer",
+    "ee_no": "integer",
+    "job_title": "text",
+    "freq_id": "text"
+}

@@ -1,0 +1,8 @@
+{
+    "runid": "integer",
+    "er_id": "integer",
+    "tax_year": "integer",
+    "tax_period": "integer",
+    "pay_date": "date",
+    "freq_id": "text"
+}

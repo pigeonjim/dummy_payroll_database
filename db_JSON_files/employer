@@ -1,0 +1,7 @@
+{
+    "er_id": "integer",
+    "er_name": "text",
+    "tax_ref": "text",
+    "bank_sort_code": "text",
+    "bank_account_no": "text"
+}

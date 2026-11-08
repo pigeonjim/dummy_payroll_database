@@ -1,0 +1,8 @@
+{
+    "office_code": "integer",
+    "er_id": "integer",
+    "name": "text",
+    "address": "text",
+    "city": "text",
+    "post_code": "text"
+}

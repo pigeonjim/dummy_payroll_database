@@ -1,0 +1,6 @@
+{
+    "payment_ref": "integer",
+    "payslip_id": "integer",
+    "amount": "numeric",
+    "payment_configid": "text"
+}

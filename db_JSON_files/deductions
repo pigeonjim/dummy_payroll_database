@@ -1,0 +1,6 @@
+{
+    "deduction_ref": "integer",
+    "payslip_id": "integer",
+    "amount": "numeric",
+    "deduction_configid": "text"
+}

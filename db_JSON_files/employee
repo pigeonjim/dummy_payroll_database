@@ -1,0 +1,9 @@
+{
+    "dob": "date",
+    "ee_no": "integer",
+    "last_name": "text",
+    "ni_number": "text",
+    "address": "text",
+    "post_code": "text",
+    "first_name": "text"
+}

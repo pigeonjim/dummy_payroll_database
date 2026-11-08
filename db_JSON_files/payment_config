@@ -1,0 +1,6 @@
+{
+    "taxable": "boolean",
+    "niable": "boolean",
+    "payment_configid": "text",
+    "description": "text"
+}

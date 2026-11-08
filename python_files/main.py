@@ -1,10 +1,16 @@
 import payruns as prs, csv, frequency_data as exd,db_functions
 from abc import ABC, abstractmethod
 
-db = db_functions.dataBaseLogins()
+
+def main_app():
+    db_logins = db_functions.dataBaseLogins()
+    chk_tbls = db_functions.checkDbTables()
+    #chk_tbls.get_current_tbls(db_logins)
+    bjs = db_functions.buildDbJSON()
+    bjs.loadtbls(db_logins)
 
 
-
+main_app()
 #main application
 # 0 Check DB exists
     #0.1 get DB name, user and password
