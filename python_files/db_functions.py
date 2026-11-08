@@ -1,4 +1,4 @@
-import psycopg, getpass, json
+import psycopg, getpass, json, os
 from psycopg import sql
 
 class dataBaseLogins:
@@ -51,54 +51,58 @@ class dataBaseLogins:
     def __str__(self):
         return (f"Current database dbname = {self.__db_name} and username = {self.__user}")
 
-class checkDbTables:
-    """Class for methods that check the current state of the database
-    - checks if all the required tables present"""
-
-    #class atribute - a list of the required table names
-    list_of_tbls = ["payroll_runs", "employee", "ee_jobs", "employer", "payslips", "deductions"
-            , "deduction_config", "frequency", "payments", "payment_config", "office"]
-    
-    def __init__(self):
-        self.__tbls = {}
-
-    def get_current_tbls(self, db_logins: dataBaseLogins):
-        missing_tbls = []
-        with psycopg.connect(db_logins.connection_string()) as conn:
-            with conn.cursor() as cur:
-                cur.execute("""SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';""")
-                
-                for record in cur:
-                    print(record[0])
-
-class buildDbJSON:
-    """ code to build JSON files that show the required database tables
-        there tables are for configuration and to aid processing
-        each table is a seperate JSON file
-        each JSON files shows the field names and types
+class whatsInTheBox:
+    """class that queries the database to get current schema
+    - This is processed in a dictionary of dictionaries where
+    1. top level key key is a table name
+    2. second level is of the config  key = field name : value = field type
     """
     def __init__(self):
-        self.data_path = "../db_JSON_files"
-        self.tbls = {}
+        self.__current_schema = {}
 
-    def loadtbls(self, db_logins: dataBaseLogins):
+    def whats_in_the_box(self, db_logins: dataBaseLogins):
         with psycopg.connect(db_logins.connection_string()) as conn:
             with conn.cursor() as cur:
                 #first cursor to get table names
                 cur.execute("""SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';""")
                 for record in cur:
-                    self.tbls[record[0]] = None
+                    self.__current_schema[record[0]] = None
                 #get field names and types for each table
-                for key in self.tbls:
-                    new_dict = {}
+                for key in self.__current_schema:
+                    new_dict = {} 
                     qry = sql.SQL("SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {what_tbl};"
                                   ).format(what_tbl = key)
                     cur.execute(qry)
+                #populate dictionaries
                     for result in cur:
                         new_dict[result[0]] = result[1]
-                    self.tbls[key] = new_dict
-        for key, tbl in self.tbls.items():
-            path = (f'../db_JSON_files/{key}')
+                    self.__current_schema[key] = new_dict
+
+    @property
+    def current_schema(self):
+        return self.__current_schema
+
+class checkDbTables:
+    """Class that checks the current schema of the database
+    - checks if all the required tables and fields are present
+    - checks db fields are of the correct type"""
+    
+    def __init__(self):
+       pass
+
+
+class buildDbJSON:
+    """ code to build JSON files that show the required database tables
+        - these files are for configuration and to aid processing
+        - each table is a seperate JSON file
+        - each JSON files shows the field names and types
+    """
+    def __init__(self, path: str = "../db_JSON_files"):
+        self.data_path = path
+
+    def loadtbls(self, curnt_tbls: whatsInTheBox):
+        for key, tbl in curnt_tbls.current_schema:
+            path = (f'../db_JSON_files/{key}.JSON')
             print(path)
             with open(path,"w") as jfile:
                 json.dump(tbl, jfile,indent=4)

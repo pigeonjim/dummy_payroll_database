@@ -1,13 +1,16 @@
-import payruns as prs, csv, frequency_data as exd,db_functions
+import payruns as prs, csv, frequency_data as exd,db_functions, os
 from abc import ABC, abstractmethod
 
 
 def main_app():
     db_logins = db_functions.dataBaseLogins()
-    chk_tbls = db_functions.checkDbTables()
-    #chk_tbls.get_current_tbls(db_logins)
-    bjs = db_functions.buildDbJSON()
-    bjs.loadtbls(db_logins)
+    curnt_schma = db_functions.whatsInTheBox()
+    curnt_schma.whats_in_the_box(db_logins)
+    print(curnt_schma.current_schema)
+
+
+    #tbl_list = [t.replace('.JSON','') for t in os.listdir('../db_JSON_files/')]
+    #print(tbl_list)
 
 
 main_app()
