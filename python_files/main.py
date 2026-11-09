@@ -5,8 +5,8 @@ from abc import ABC, abstractmethod
 def main_app():
     db_logins = db_functions.dataBaseLogins()
     curnt_schma = db_functions.whatsInTheBox()
-    curnt_schma.whats_in_the_box(db_logins)
-    print(curnt_schma.current_schema)
+    print(curnt_schma.whats_in_the_box(db_logins))
+    
 
 
     #tbl_list = [t.replace('.JSON','') for t in os.listdir('../db_JSON_files/')]

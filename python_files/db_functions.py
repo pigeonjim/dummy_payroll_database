@@ -58,17 +58,18 @@ class whatsInTheBox:
     2. second level is of the config  key = field name : value = field type
     """
     def __init__(self):
-        self.__current_schema = {}
+        pass
 
     def whats_in_the_box(self, db_logins: dataBaseLogins):
+        current_schema = {}
         with psycopg.connect(db_logins.connection_string()) as conn:
             with conn.cursor() as cur:
                 #first cursor to get table names
                 cur.execute("""SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';""")
                 for record in cur:
-                    self.__current_schema[record[0]] = None
+                    current_schema[record[0]] = None
                 #get field names and types for each table
-                for key in self.__current_schema:
+                for key in current_schema:
                     new_dict = {} 
                     qry = sql.SQL("SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {what_tbl};"
                                   ).format(what_tbl = key)
@@ -76,7 +77,8 @@ class whatsInTheBox:
                 #populate dictionaries
                     for result in cur:
                         new_dict[result[0]] = result[1]
-                    self.__current_schema[key] = new_dict
+                    current_schema[key] = new_dict
+        return current_schema
 
     @property
     def current_schema(self):
@@ -101,7 +103,7 @@ class buildDbJSON:
         self.data_path = path
 
     def loadtbls(self, curnt_tbls: whatsInTheBox):
-        for key, tbl in curnt_tbls.current_schema:
+        for key, tbl in curnt_tbls.whats_in_the_box():
             path = (f'../db_JSON_files/{key}.JSON')
             print(path)
             with open(path,"w") as jfile:
