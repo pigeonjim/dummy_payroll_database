@@ -89,8 +89,31 @@ class checkDbTables:
     - checks if all the required tables and fields are present
     - checks db fields are of the correct type"""
     
-    def __init__(self):
-       pass
+    def __init__(self, path: str):
+       """
+            path = the path to the JSON folder
+       """
+       self.data_path = path
+
+    def read_tblJSON(self):
+        """
+        JSON files processed in a dictionary of dictionaries where
+        1. top level key key is a table name
+        2. second level is of the config  key = field name : value = field type
+        """
+        tbl_list = {}
+        for tbl in os.listdir(self.data_path):
+            path = (f"{self.data_path}/{tbl}")
+            with open(path,'r') as tbl_file:
+                tbl_list[tbl.replace('.JSON','')] = json.load(tbl_file)
+        return tbl_list
+
+
+
+    def check_tables(self, curnt_tbls: whatsInTheBox,db_logins: dataBaseLogins):
+        #curnt_tbls.whats_in_the_box(db_logins).keys()
+        #with open(self.data_path,'r') as jfiles:
+        pass
 
 
 class buildDbJSON:
@@ -99,12 +122,12 @@ class buildDbJSON:
         - each table is a seperate JSON file
         - each JSON files shows the field names and types
     """
-    def __init__(self, path: str = "../db_JSON_files"):
+    def __init__(self, path: str):
         self.data_path = path
 
     def loadtbls(self, curnt_tbls: whatsInTheBox):
         for key, tbl in curnt_tbls.whats_in_the_box():
-            path = (f'../db_JSON_files/{key}.JSON')
+            path = (f'{self.data_path}/{key}.JSON')
             print(path)
             with open(path,"w") as jfile:
                 json.dump(tbl, jfile,indent=4)

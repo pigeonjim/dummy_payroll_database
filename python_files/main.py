@@ -3,9 +3,12 @@ from abc import ABC, abstractmethod
 
 
 def main_app():
-    db_logins = db_functions.dataBaseLogins()
-    curnt_schma = db_functions.whatsInTheBox()
-    print(curnt_schma.whats_in_the_box(db_logins))
+    #db_logins = db_functions.dataBaseLogins()
+    #curnt_schma = db_functions.whatsInTheBox()
+    tbl_chk_ob = db_functions.checkDbTables('./db_JSON_files')
+    tbl_chk_ob.read_tblJSON()
+    #tbl_chk_ob.check_tables(curnt_schma,db_logins)
+
     
 
 
