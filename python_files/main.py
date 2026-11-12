@@ -12,14 +12,11 @@ def main_app():
         print("Fields are not correct do you want to reset the tables?")
     else:
         print("All tables are correct")
-    
 
-
-    #tbl_list = [t.replace('.JSON','') for t in os.listdir('../db_JSON_files/')]
-    #print(tbl_list)
-
-
-main_app()
+db_logins = db_functions.dataBaseLogins()
+scripts = db_functions.runSQLscripts('./postgre_files')
+scripts.reset_db(db_logins)
+#main_app()
 #main application
 # 0 Check DB exists
     #0.1 get DB name, user and password

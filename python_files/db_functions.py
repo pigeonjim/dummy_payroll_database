@@ -142,7 +142,6 @@ class checkDbTables:
         else:
             return True
 
-
 class buildDbJSON:
     """ code to build JSON files that show the required database tables
         - these files are for configuration and to aid processing
@@ -159,4 +158,30 @@ class buildDbJSON:
             with open(path,"w") as jfile:
                 json.dump(tbl, jfile,indent=4)
 
+class runSQLscripts:
+    def __init__(self, path: str):
+        """
+            path is path to postgre files
+        """
+        self.path = path
 
+    def run_script(self, db_logins: dataBaseLogins, script_name: str):
+        """
+            Runs sql script on db
+        """
+        script_path = (f"{self.path}/{script_name}")
+        with open(script_path, 'r') as script_file:
+            sql_drops = script_file.read()
+        with psycopg.connect(db_logins.connection_string()) as conn:
+            with conn.cursor() as cur:
+                cur.execute(sql_drops)
+
+    def reset_db(self, db_logins: dataBaseLogins,):
+        """
+            Drops all tables then creates all tables and constraints
+            then runs fixed data script
+        """
+        script_list = ['99.drop_all_tables.sql','01_create_tables.sql','02_alter_tables.sql','03 fixed_data.sql']
+        for script in script_list:
+            self.run_script(db_logins,script)
+    
