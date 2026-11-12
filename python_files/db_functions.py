@@ -94,6 +94,7 @@ class checkDbTables:
             path = the path to the JSON folder
        """
        self.data_path = path
+       self.tbl_dicts = self.read_tblJSON()
 
     def read_tblJSON(self):
         """
@@ -111,9 +112,35 @@ class checkDbTables:
 
 
     def check_tables(self, curnt_tbls: whatsInTheBox,db_logins: dataBaseLogins):
-        #curnt_tbls.whats_in_the_box(db_logins).keys()
-        #with open(self.data_path,'r') as jfiles:
-        pass
+        not_found = []
+        curnt_tables = curnt_tbls.whats_in_the_box(db_logins)
+        for tbls in self.tbl_dicts.keys():
+            if tbls not in curnt_tables.keys():
+                not_found.append(tbls)
+        if len(not_found) > 0:
+            print(f"{len(not_found)} {"table was" if len(not_found) == 1 else "tables were"} not found")
+            return False
+        else:
+            return True
+
+    def check_fields(self, curnt_tbls: whatsInTheBox,db_logins: dataBaseLogins):
+        fields_not_found = []
+        wrong_types = {}
+        curnt_tables = curnt_tbls.whats_in_the_box(db_logins)
+        for tbl_key in self.tbl_dicts.keys():
+            if tbl_key in  curnt_tables.keys():
+                for fields, types in self.tbl_dicts[tbl_key].items():
+                    if fields not in curnt_tables[tbl_key].keys():
+                        fields_not_found.append(fields)
+                    else:
+                        if types != curnt_tables[tbl_key][fields]:
+                            wrong_types[fields] = curnt_tables[tbl_key][fields]
+        if len(fields_not_found) > 0 or len(wrong_types) > 0:
+            print(f"{len(fields_not_found)} {"field" if len(fields_not_found) == 1 else "fields"} not found")
+            print(f"{len(wrong_types)} {"type" if len(wrong_types) == 1 else "types"} are incorrect")
+            return False
+        else:
+            return True
 
 
 class buildDbJSON:

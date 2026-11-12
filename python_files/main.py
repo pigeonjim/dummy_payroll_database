@@ -3,12 +3,15 @@ from abc import ABC, abstractmethod
 
 
 def main_app():
-    #db_logins = db_functions.dataBaseLogins()
-    #curnt_schma = db_functions.whatsInTheBox()
-    tbl_chk_ob = db_functions.checkDbTables('./db_JSON_files')
-    tbl_chk_ob.read_tblJSON()
-    #tbl_chk_ob.check_tables(curnt_schma,db_logins)
-
+    db_logins = db_functions.dataBaseLogins()
+    curnt_schma = db_functions.whatsInTheBox()
+    tbl_chk_ob = db_functions.checkDbTables('./db_JSON_files')    
+    if not tbl_chk_ob.check_tables(curnt_schma,db_logins):
+        print("do you want to reset the tables?")
+    elif not tbl_chk_ob.check_fields(curnt_schma,db_logins):
+        print("Fields are not correct do you want to reset the tables?")
+    else:
+        print("All tables are correct")
     
 
 
