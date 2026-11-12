@@ -1,5 +1,5 @@
 """
-This module has the functionality for the frequency table in the database
+This module has the functionality for inputing rows into tables in the database
 It has an interface to allow for different input methods
 and a controller class frequencyData
 
